@@ -5,8 +5,8 @@ langchain-openai>=0.3.32,<0.4.0
 langgraph>=0.6.6,<0.7.0
 langchain-core>=0.3.75,<0.4.0
 pydantic>=2.11.7,<3.0.0
-python-dotenv>=0.9.9
-gradio>=4.44.1
+python-dotenv>=0.9.9,<1.0.0
+gradio==5.44.1
 langfuse>=3.3.3,<4.0.0
 
 # Additional dependencies for web hosting
@@ -14,3 +14,7 @@ uvicorn>=0.35.0
 fastapi>=0.116.0
 requests>=2.32.0
 pyyaml>=6.0.0
+
+# Dependencies for image conversion
+playwright>=1.40.0
+reportlab>=4.0.0

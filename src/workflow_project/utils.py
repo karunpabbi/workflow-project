@@ -22,22 +22,22 @@ def fix_mermaid(code: str) -> str:
 
 
 def get_fixed_mermaid_data(text: str) -> str:
-    # Regex to capture code block between ```mermaid ... ```
-    pattern = r"```mermaid(.*?)```"
-    matches = re.findall(pattern, text, flags=re.DOTALL)
+    # Regex to capture code block between ```mermaid ... ``` (handles newlines)
+    pattern = r"```mermaid\s*\n([\s\S]*?)```"
 
-    fixed_text = text
-    fixed_code = """
-    flowchart TD
-    A[No Mermaid diagram found]:::common
-    """
-    for match in matches:
-        original_code = match.strip()
-        fixed_code = fix_mermaid(original_code)  # reuse the fixer we wrote earlier
+    def replacer(match):
+        original_code = match.group(1).strip()
+        fixed_code = fix_mermaid(original_code)
+        return f"```mermaid\n{fixed_code}\n```"
 
-        # Replace only the inner code, keep the ```mermaid fences
-        fixed_text = fixed_text.replace(
-            f"```mermaid{match}```", f"```mermaid\n{fixed_code}\n```"
-        )
+    fixed_text, count = re.subn(pattern, replacer, text)
 
-    return fixed_text, f"```mermaid\n{fixed_code}\n```"
+    # If no diagrams found, return a default diagram
+    if count == 0:
+        default_code = """flowchart TD\nA[No Mermaid diagram found]:::common"""
+        return text, f"```mermaid\n{default_code}\n```"
+
+    # Return the fixed text and the last fixed diagram (for compatibility)
+    last_fixed = re.findall(pattern, fixed_text)
+    last_code = last_fixed[-1] if last_fixed else ""
+    return fixed_text, f"```mermaid\n{last_code}\n```"
