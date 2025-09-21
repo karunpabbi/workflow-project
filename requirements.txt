@@ -1,20 +1,22 @@
-# Core dependencies for ProHance Workflow Process Generator
-langchain>=0.3.27,<0.4.0
-langchain-community>=0.3.29,<0.4.0
+# Minimal requirements for Vercel deployment
+# Core AI dependencies
+langchain-core>=0.3.75,<0.4.0
 langchain-openai>=0.3.32,<0.4.0
 langgraph>=0.6.6,<0.7.0
-langchain-core>=0.3.75,<0.4.0
 pydantic>=2.11.7,<3.0.0
 python-dotenv>=0.9.9,<1.0.0
+
+# Web interface
 gradio==5.44.1
+
+# Observability (optional - can be removed to save space)
 langfuse>=3.3.3,<4.0.0
 
-# Additional dependencies for web hosting
-uvicorn>=0.35.0
-fastapi>=0.116.0
+# Essential utilities only
 requests>=2.32.0
-pyyaml>=6.0.0
 
-# Dependencies for image conversion
-playwright>=1.40.0
-reportlab>=4.0.0
+# Remove heavy dependencies for Vercel:
+# - playwright (too large)
+# - langchain-community (has many optional deps)
+# - reportlab (for PDF generation)
+# - fastapi, uvicorn (not needed for Gradio on Vercel)

@@ -5,7 +5,10 @@
       "src": "src/workflow_project/app.py",
       "use": "@vercel/python",
       "config": {
-        "runtime": "python3.13"
+        "runtime": "python3.13",
+        "maxLambdaSize": "250mb",
+        "includeFiles": "src/**",
+        "excludeFiles": "{.git/**,node_modules/**,*.pyc,__pycache__/**,tests/**,*.md,workflow_env/**}"
       }
     }
   ],
