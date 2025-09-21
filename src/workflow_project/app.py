@@ -589,6 +589,7 @@ if __name__ == "__main__":
     import os
     port = int(os.environ.get("PORT", 7870))
     
+    
     if os.environ.get("VERCEL"):
         # Running on Vercel
         app.launch(
