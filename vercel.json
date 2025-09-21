@@ -3,7 +3,10 @@
   "builds": [
     {
       "src": "src/workflow_project/app.py",
-      "use": "@vercel/python"
+      "use": "@vercel/python",
+      "config": {
+        "runtime": "python3.13"
+      }
     }
   ],
   "routes": [
@@ -13,11 +16,7 @@
     }
   ],
   "env": {
-    "PYTHONPATH": "/vercel/path0/src"
-  },
-  "functions": {
-    "src/workflow_project/app.py": {
-      "runtime": "python3.13.5"
-    }
+    "PYTHONPATH": "/vercel/path0/src",
+    "VERCEL": "1"
   }
 }
