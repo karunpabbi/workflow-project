@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/workflow_project/app.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/workflow_project/app.py"
+    }
+  ],
+  "env": {
+    "PYTHONPATH": "/vercel/path0/src"
+  },
+  "functions": {
+    "src/workflow_project/app.py": {
+      "runtime": "python3.9"
+    }
+  }
+}

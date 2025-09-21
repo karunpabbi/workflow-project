@@ -585,8 +585,22 @@ if __name__ == "__main__":
         
 
 
-    app.launch(
-        server_name="0.0.0.0",
-        server_port=7870,
-        share=True
-    )
+    # For Vercel deployment
+    import os
+    port = int(os.environ.get("PORT", 7870))
+    
+    if os.environ.get("VERCEL"):
+        # Running on Vercel
+        app.launch(
+            server_name="0.0.0.0",
+            server_port=port,
+            share=False,
+            show_error=True
+        )
+    else:
+        # Running locally
+        app.launch(
+            server_name="0.0.0.0",
+            server_port=7870,
+            share=True
+        )
